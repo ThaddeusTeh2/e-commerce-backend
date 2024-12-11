@@ -1,9 +1,8 @@
-const express = require("express");
-const Product = require("../models/products");
+const Product = require("../models/product");
 
 const getCategories = async () => {
   //get all products
-  const Products = await Product.find();
+  const products = await Product.find();
 
   //container
   let categories = [];

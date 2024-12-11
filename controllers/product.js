@@ -1,5 +1,5 @@
 //loads models
-const Product = require("../models/products");
+const Product = require("../models/product");
 
 //!funcs (CRUD)
 //get all products

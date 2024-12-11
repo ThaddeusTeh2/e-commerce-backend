@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
   res.send("Initialized");
 });
 //TODO import all routes
-const productRouter = require("./routes/products");
+const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/categories");
 
 app.use("/products", productRouter);
