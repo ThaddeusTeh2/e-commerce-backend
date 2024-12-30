@@ -15,10 +15,12 @@ const {
 router.get("/", async (req, res) => {
   try {
     const name = req.query.name;
+    const page = req.query.page;
+    const per_page = req.query.per_page;
     const category = req.query.category;
 
     //getProducts from controller (fetches all products)
-    const products = await getProducts(name, category);
+    const products = await getProducts(name, category, page, per_page);
     res.status(200).send(products);
   } catch (error) {
     res.status(400).send({

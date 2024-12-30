@@ -3,7 +3,7 @@ const Product = require("../models/product");
 
 //!funcs (CRUD)
 //get all products
-const getProducts = async (name, category) => {
+const getProducts = async (name, category, page = 1, per_page = 6) => {
   // 1. empty container 4 filter
   let filter = {};
   // name exists ? hawk tuah into container
@@ -15,7 +15,10 @@ const getProducts = async (name, category) => {
     filter.category = category;
   }
   // apply filter in .find()
-  const products = await Product.find(filter);
+  const products = await Product.find(filter)
+    .limit(per_page)
+    .skip((page - 1) * per_page)
+    .sort({ name: -1 });
   return products;
 };
 

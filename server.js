@@ -1,3 +1,4 @@
+require("dotenv").config();
 //import express
 const express = require("express");
 const mongoose = require("mongoose");
@@ -26,11 +27,15 @@ app.get("/", (req, res) => {
 //TODO import all routes
 const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/categories");
+const orderRouter = require("./routes/order");
 
 app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
+app.use("/orders", require("./routes/order"));
+app.use("/payment", require("./routes/payment"));
 
 //!server start
 app.listen(5555, () => {
   console.log("Running @ http://localhost:5555");
+  console.log(process.env);
 });
