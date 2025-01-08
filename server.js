@@ -33,6 +33,7 @@ app.use("/products", productRouter);
 app.use("/categories", categoryRouter);
 app.use("/orders", require("./routes/order"));
 app.use("/payment", require("./routes/payment"));
+app.use("/auth", require("./routes/user"));
 
 //!server start
 app.listen(5555, () => {
