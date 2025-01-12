@@ -3,9 +3,13 @@ const axios = require("axios");
 const Order = require("../models/order");
 
 // get all the orders
-const getOrders = async () => {
-  const orders = await Order.find();
-  return orders;
+const getOrders = async (email, role) => {
+  let filter = {};
+  // if is admin, no need to filter by customerEmail
+  if (role !== "admin") {
+    filter.customerEmail = email;
+  }
+  return await Order.find(filter).sort({ _id: -1 });
 };
 
 // get one order
@@ -26,7 +30,7 @@ const addNewOrder = async (
     "https://www.billplz-sandbox.com/api/v3/bills",
     {
       collection_id: process.env.BILLPLZ_COLLECTION_ID,
-      description: "SAMBUBU",
+      description: "VAPEHAUS.MY",
       name: customerName,
       email: customerEmail,
       amount: totalPrice * 100,

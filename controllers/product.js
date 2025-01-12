@@ -29,12 +29,13 @@ const getProduct = async (id) => {
 };
 
 //add new prod
-const addNewProduct = async (name, description, price, category) => {
+const addNewProduct = async (name, description, price, category, image) => {
   const newProduct = new Product({
     name,
     description,
     price,
     category,
+    image,
   });
   // save the new product into mongodb
   await newProduct.save();

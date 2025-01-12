@@ -11,6 +11,10 @@ const app = express();
 app.use(express.json());
 //cors setup
 app.use(cors());
+
+// set a folder as a static path
+app.use("/uploads", express.static("uploads"));
+
 //connect 2 db
 mongoose
   .connect("mongodb://localhost:27017/ecom")
@@ -34,6 +38,7 @@ app.use("/categories", categoryRouter);
 app.use("/orders", require("./routes/order"));
 app.use("/payment", require("./routes/payment"));
 app.use("/auth", require("./routes/user"));
+app.use("/image", require("./routes/image"));
 
 //!server start
 app.listen(5555, () => {

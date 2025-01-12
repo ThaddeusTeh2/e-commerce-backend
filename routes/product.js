@@ -10,6 +10,9 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../controllers/product");
+
+const { isAdmin } = require("../middleware/auth");
+
 //CRUD
 // get all products @ /products (GET)
 router.get("/", async (req, res) => {
@@ -42,12 +45,13 @@ router.get("/:id", async (req, res) => {
 });
 
 // add 1 product (POST)
-router.post("/", async (req, res) => {
+router.post("/", isAdmin, async (req, res) => {
   try {
     const name = req.body.name;
     const description = req.body.description;
     const price = req.body.price;
     const category = req.body.category;
+    const image = req.body.image;
 
     // !err check
     if (!name || !category) {
@@ -57,7 +61,13 @@ router.post("/", async (req, res) => {
     }
 
     //pass data 2 addProd function
-    const newProduct = await addNewProduct(name, description, price, category);
+    const newProduct = await addNewProduct(
+      name,
+      description,
+      price,
+      category,
+      image
+    );
     res.status(200).send(newProduct);
   } catch (error) {
     res.status(400).send(error._message);
@@ -65,7 +75,7 @@ router.post("/", async (req, res) => {
 });
 
 // update product (PUT)
-router.put("/:id", async (req, res) => {
+router.put("/:id", isAdmin, async (req, res) => {
   try {
     const id = req.params.id;
     const name = req.body.name;
@@ -89,7 +99,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // delete product (DELETE)
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAdmin, async (req, res) => {
   try {
     const id = req.params.id;
     await deleteProduct(id);
