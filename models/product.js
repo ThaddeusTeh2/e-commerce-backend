@@ -1,6 +1,7 @@
-//make schema 4d prod (rule setting)
+// schema for movies collection
 const { Schema, model } = require("mongoose");
-//setup
+
+// setup the schema
 const productSchema = new Schema({
   name: {
     type: String,
@@ -13,14 +14,15 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
+  // linkage between the products and categories (Similar to SQL foreign key)
   category: {
-    type: String,
-    required: true,
+    type: Schema.Types.ObjectId,
+    ref: "Category",
   },
   image: String,
 });
 
-//schema -> model
+// convert the schema to a model
 const Product = model("Product", productSchema);
 
-module.exports = Product; // = "export default" in React
+module.exports = Product;

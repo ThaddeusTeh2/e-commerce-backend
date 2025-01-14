@@ -1,23 +1,41 @@
-const Product = require("../models/product");
+const Category = require("../models/category");
 
 const getCategories = async () => {
-  //get all products
-  const products = await Product.find();
-
-  //container
-  let categories = [];
-
-  //go through all the categories in all products
-  products.forEach((product) => {
-    //if find a duplicate category, ignore
-    if (!categories.includes(product.category)) {
-      //push new arr with only unique categories
-      categories.push(product.category);
-    }
-  });
+  const categories = await Category.find();
   return categories;
+};
+
+const getCategory = async (_id) => {
+  const category = await Category.findOne({ _id });
+  return category;
+};
+
+const addNewCategory = async (name) => {
+  const newCategory = new Category({
+    name,
+  });
+  await newCategory.save();
+  return newCategory;
+};
+
+const updateCategory = async (_id, name) => {
+  const updatedCategory = await Category.findOneAndUpdate(
+    { _id },
+    { name },
+    { new: true }
+  );
+  return updatedCategory;
+};
+
+const deleteCategory = async (_id) => {
+  const deleteCategory = await Category.deleteOne({ _id });
+  return deleteCategory;
 };
 
 module.exports = {
   getCategories,
+  getCategory,
+  addNewCategory,
+  updateCategory,
+  deleteCategory,
 };
