@@ -70,11 +70,11 @@ router.put("/:id", async (req, res) => {
     // Retrieve id from URL
     const id = req.params.id;
     const name = req.body.name;
-    // Pass in the data into the updateCategory function
+    // Pass in data into updateCategory function
     const updatedCategory = await updateCategory(id, name);
     res.status(200).send(updatedCategory);
   } catch (error) {
-    // If there is an error, return the error code
+    // If there is an error, return error code
     res.status(400).send({
       error: error._message,
     });
@@ -84,26 +84,26 @@ router.put("/:id", async (req, res) => {
 // delete category
 router.delete("/:id", async (req, res) => {
   try {
-    // Retrieve the id from the URL
+    // Retrieve id from  URL
     const id = req.params.id;
-    // Validate the ID format before querying the database
+    // Validate ID format before querying  database
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).send({
         error: `Invalid ID format: "${id}". A valid MongoDB ObjectId is required.`,
       });
     }
     const category = await getCategory(id);
-    // If the category does not exist
+    // If  category does not exist
     if (!category) {
       /* !category because it is returning either a single object or null */
       return res.status(404).send({
-        error: `Error: No match for a category found with the id "${id}".`,
+        error: `Error: No match for a category found with  id "${id}".`,
       });
     }
-    // Trigger the deletecategory function
+    // Trigger  delete category function
     const status = await deleteCategory(id);
     res.status(200).send({
-      message: `Alert: Category with the provided id #${id} has been deleted`,
+      message: `Alert: Category with  provided id #${id} has been deleted`,
     });
   } catch (error) {
     console.log(error);

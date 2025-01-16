@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(cors());
 
 // set a folder as a static path
-app.use("/uploads", express.static("uploads"));
+app.use("/api/uploads", express.static("uploads"));
 
 //connect 2 db
 mongoose
@@ -33,12 +33,12 @@ const productRouter = require("./routes/product");
 const categoryRouter = require("./routes/categories");
 const orderRouter = require("./routes/order");
 
-app.use("/products", productRouter);
-app.use("/categories", categoryRouter);
-app.use("/orders", require("./routes/order"));
-app.use("/payment", require("./routes/payment"));
-app.use("/auth", require("./routes/user"));
-app.use("/image", require("./routes/image"));
+app.use("/api/products", productRouter);
+app.use("/api/categories", categoryRouter);
+app.use("/api/orders", require("./routes/order"));
+app.use("/api/payment", require("./routes/payment"));
+app.use("/api/auth", require("./routes/user"));
+app.use("/api/image", require("./routes/image"));
 
 //!server start
 app.listen(5555, () => {
