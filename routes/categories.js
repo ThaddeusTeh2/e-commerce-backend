@@ -46,7 +46,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // add new category
-router.post("/", async (req, res) => {
+router.post("/", isAdmin, async (req, res) => {
   try {
     const name = req.body.name;
     if (!name) {
@@ -65,7 +65,7 @@ router.post("/", async (req, res) => {
 });
 
 // update category
-router.put("/:id", async (req, res) => {
+router.put("/:id", isAdmin, async (req, res) => {
   try {
     // Retrieve id from URL
     const id = req.params.id;
@@ -82,7 +82,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // delete category
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", isAdmin, async (req, res) => {
   try {
     // Retrieve id from  URL
     const id = req.params.id;
