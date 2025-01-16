@@ -17,7 +17,7 @@ app.use("/api/uploads", express.static("uploads"));
 
 //connect 2 db
 mongoose
-  .connect("mongodb://localhost:27017/ecom")
+  .connect(process.env.MONGODB_URL + "/ecom")
   .then(() => {
     console.log("Connected 2 mongodb :D");
   })
