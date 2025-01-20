@@ -30,12 +30,12 @@ const addNewOrder = async (
     "https://www.billplz-sandbox.com/api/v3/bills",
     {
       collection_id: process.env.BILLPLZ_COLLECTION_ID,
-      description: "VAPEHAUS.MY",
+      description: "gg.com",
       name: customerName,
       email: customerEmail,
       amount: totalPrice * 100,
-      callback_url: "http://localhost:3000/verify-payment",
-      redirect_url: "http://localhost:3000/verify-payment",
+      callback_url: process.env.FRONTEND_URL + "/verify-payment",
+      redirect_url: process.env.FRONTEND_URL + "/verify-payment",
     },
     {
       auth: {
